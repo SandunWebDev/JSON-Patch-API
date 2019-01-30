@@ -6,6 +6,25 @@
 module.exports = {
   extends: ["airbnb-base", "plugin:prettier/recommended"],
   rules: {
-    "no-console": "off"
-  }
+    "no-console": "off",
+    "no-unused-vars": "off" // Since express error middleware need "next" whether its used or not. TODO: Should find proper solution.
+  },
+
+  // Making "**/*.test.js files" has both es6 and jest env values like "describe, it, ..."
+  overrides: [
+    {
+      files: ["**/*.test.js"],
+      env: {
+        jest: true
+      },
+      plugins: ["jest"],
+      rules: {
+        "jest/no-disabled-tests": "warn",
+        "jest/no-focused-tests": "error",
+        "jest/no-identical-title": "error",
+        "jest/prefer-to-have-length": "warn",
+        "jest/valid-expect": "error"
+      }
+    }
+  ]
 };
