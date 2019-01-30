@@ -1,0 +1,7 @@
+{
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "git.autofetch": true,
+  "files.autoSave": "onFocusChange",
+  "eslint.autoFixOnSave": true,
+  "editor.formatOnSave": true
+}
