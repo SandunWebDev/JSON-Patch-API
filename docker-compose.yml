@@ -1,0 +1,14 @@
+version: "3.4"
+
+services:
+  backend:
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      # Getting env. variable directly from host enviroment OR .env file and pass them into container.
+      - NODE_ENV
+      - PORT
+
+# Custom volume to store data premenetly.
+volumes:
+  ? tempData # For holding container's node_modules without clashing with host node_modules. (See docker-compose.dev.yml)

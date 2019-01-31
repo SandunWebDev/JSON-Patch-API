@@ -1,0 +1,18 @@
+version: "3.4"
+
+services:
+  backend:
+    build:
+      context: .
+      # Building only upto dev stage.
+      target: dev
+    container_name: json-patch-api-container-dev
+    image: json-patch-api-image-dev
+    command: npm run start:dev
+    # Dynamic mounting. So hot reload & code editing can be done without building again and again.
+    volumes:
+      # Mounting Current host folder into container.
+      - .:/usr/app
+      # Below is a workaround to prevent host node_modules from accidently getting mounted in container. So host node_module folder don't have no effect on container.
+      # Useful when want to use node/npm both outside container for test/lint, OR CI envoroments, etc.
+      - tempData:/usr/app/node_modules

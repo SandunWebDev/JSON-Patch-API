@@ -4,16 +4,28 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint ./ --fix --ignore-path .gitignore",
+    "lint": "eslint ./ --ignore-path .gitignore",
+    "lint:fix": "eslint ./ --fix --ignore-path .gitignore",
     "start": "node index.js",
     "start:dev": "nodemon index.js",
     "test": "jest --coverage",
     "test:watchAll": "jest --watchAll",
     "test:unit": "jest --testPathIgnorePatterns integration --watchAll",
-    "test:integration": "jest --testPathIgnorePatterns unit --watchAll"
+    "test:integration": "jest --testPathIgnorePatterns unit --watchAll",
+    "docker:dev:run": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build",
+    "docker:dev:stop": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml down -v && docker image prune -f",
+    "docker:dev:test": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml run -e NODE_ENV=test backend npm test",
+    "docker:prod:run": "docker-compose -f docker-compose.yml -f docker-compose.production.yml up --build",
+    "docker:prod:stop": "docker-compose -f docker-compose.yml -f docker-compose.production.yml down -v && docker image prune -f"
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1"
+  },
   "devDependencies": {
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
@@ -26,13 +38,9 @@
     "nodemon": "^1.18.9",
     "prettier": "^1.16.2"
   },
-  "dependencies": {
-    "express": "^4.16.4",
-    "morgan": "^1.9.1"
-  },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm test && git add ."
+      "pre-commit": "npm run lint:fix && npm test && git add ."
     }
   }
 }

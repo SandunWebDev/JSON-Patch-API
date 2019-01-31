@@ -7,7 +7,8 @@ module.exports = {
   extends: ["airbnb-base", "plugin:prettier/recommended"],
   rules: {
     "no-console": "off",
-    "no-unused-vars": "off" // Since express error middleware need "next" whether its used or not. TODO: Should find proper solution.
+    "no-unused-vars": "off", // Since express error middleware need "next" whether its used or not. TODO: Should find proper solution.
+    camelcase: "off"
   },
 
   // Making "**/*.test.js files" has both es6 and jest env values like "describe, it, ..."
