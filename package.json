@@ -9,14 +9,16 @@
     "start": "node index.js",
     "start:dev": "nodemon index.js",
     "test": "jest --coverage",
+    "test:ci": "npm test && codecov",
     "test:watchAll": "jest --watchAll",
     "test:unit": "jest --testPathIgnorePatterns integration --watchAll",
     "test:integration": "jest --testPathIgnorePatterns unit --watchAll",
     "docker:dev:run": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build",
     "docker:dev:stop": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml down -v && docker image prune -f",
-    "docker:dev:test": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml run -e NODE_ENV=test backend npm test",
+    "docker:dev:test": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml run --rm -e NODE_ENV=test backend npm test",
     "docker:prod:run": "docker-compose -f docker-compose.yml -f docker-compose.production.yml up --build",
-    "docker:prod:stop": "docker-compose -f docker-compose.yml -f docker-compose.production.yml down -v && docker image prune -f"
+    "docker:prod:stop": "docker-compose -f docker-compose.yml -f docker-compose.production.yml down -v && docker image prune -f",
+    "docker:prod:push": "(docker-compose -f docker-compose.yml -f docker-compose.production.yml build) && (docker tag json-patch-api-image-prod sandunwebdev/json-patch-api-image-prod:latest) && (docker push sandunwebdev/json-patch-api-image-prod:latest)"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +29,7 @@
     "morgan": "^1.9.1"
   },
   "devDependencies": {
+    "codecov": "^3.1.0",
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.0.0",

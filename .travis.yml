@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+  - 10
+services:
+  - docker
+addons:
+  apt:
+    packages:
+      # Updating Docker.
+      - docker-ce
+install:
+  - echo "Overriding default npm install because we are using Docker."
+
+jobs:
+  include:
+    - stage: "Tests"
+      script: docker-compose -f docker-compose.yml -f docker-compose.dev.yml run --rm backend bash -c 'npm run test:ci'
+
+    # Docker deployment only happen for "master" and "release" branches. Pull requesting to those branches also trigger this build unless disabled in Travis CI Settings.
+    - stage: "Docker-Deployment"
+      if: branch = master OR branch = release
+      script: ./docker/helpers/dockerHubUpload.sh
