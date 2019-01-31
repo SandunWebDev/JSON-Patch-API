@@ -18,6 +18,7 @@ const defaultEnvValuesOverrides_production = {
 
 // All Configs (For Development, Testing, Production)
 // Specifity of env. values from Higher to Lower is "Terminal ENV. Values --> .env File Values --> Default Override Values -> Default Values"
+// TODO : Create seperate function to generate appopriate configs instead of getting in plain object.
 const configs = {
   development: Object.assign(
     {},

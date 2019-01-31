@@ -1,7 +1,7 @@
-const app = require("./expressServer");
+const expressServer = require("./expressServer");
 const config = require("./configs/mainConfigs");
 
-app
+expressServer
   .listen(config.PORT, () =>
     console.log(
       `Server is running on "${config.NODE_ENV}" enviroment at port ${
