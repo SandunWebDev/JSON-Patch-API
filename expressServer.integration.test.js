@@ -1,7 +1,5 @@
 const request = require("supertest");
-
 const expressServer = require("./expressServer");
-const rootRouter = require("./routers/rootRouter");
 
 describe("Express Server Starting Point", () => {
   it("Should handle requests to Root Path sucessfully.", done => {

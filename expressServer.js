@@ -1,10 +1,16 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const passport = require("passport");
 
+require("./passport/passportStrategies");
 const config = require("./configs/mainConfigs");
 
-const rootRouter = require("./routers/rootRouter");
+const customErrorHandler = require("./errorHandlers/middlewares/customErrorHandler");
+const defaultErrorHandler = require("./errorHandlers/middlewares/defaultErrorHandler");
+
+const rootRouter = require("./routers/rootRouter/rootRouter");
+const authRouter = require("./routers/authRouter/authRouter");
 
 const app = express();
 
@@ -17,12 +23,15 @@ app.use(cors()); //  Enable all CORS requests from any origin.
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Public Endpoints
 app.use("/", rootRouter);
+app.use("/auth", authRouter);
 
-app.use((err, req, res, next) => {
-  res.status(500).json({ success: false, errMsg: "Server Error Occured." });
-});
+// Error Handlers
+app.use(customErrorHandler);
+app.use(defaultErrorHandler);
 
+// Path not found is not a error. So we need custom middleware to catch them.
 app.use((req, res) => {
   res.status(404).json({ success: false, errMsg: "Requested Path Not Found." });
 });

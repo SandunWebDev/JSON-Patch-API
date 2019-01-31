@@ -6,7 +6,10 @@ const { parsed: parsedEnvValues = {} } = dotenv.config(); // Loading & Parsing e
 // Default values for any enviroment. (Only applicable if specifcally not provided in terminal enviroment or .env file)
 const defaultEnvValues = {
   NODE_ENV: "development",
-  PORT: "4000"
+  PORT: "4000",
+
+  JWT_SECRET: "superPassword!@#$",
+  JWT_EXPIRES: "3600s"
 };
 
 // Provide any override default value for specific enviroment here.

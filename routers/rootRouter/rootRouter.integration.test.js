@@ -1,5 +1,5 @@
 const request = require("supertest");
-const expressServer = require("../expressServer");
+const expressServer = require("../../expressServer");
 
 // Note - Most of below integration test are for just to experiment integration tests. Because most of these test cases already cover in unit tests.
 
