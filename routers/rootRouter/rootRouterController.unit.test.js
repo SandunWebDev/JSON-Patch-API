@@ -1,8 +1,8 @@
 const httpMocks = require("node-mocks-http");
 const { rootPath__GET } = require("./rootRouterController");
 
-describe("rootRouterController", () => {
-  describe("rootPath__GET", () => {
+describe("Router Controller - '/'", () => {
+  describe("Path - 'GET /'", () => {
     it("Should return status code 200 when successfull.", () => {
       const req = httpMocks.createRequest();
       const res = httpMocks.createResponse();

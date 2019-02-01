@@ -3,7 +3,7 @@ const expressServer = require("../../expressServer");
 
 // Note - Most of below integration test are for just to experiment integration tests. Because most of these test cases already cover in unit tests.
 
-describe("rootRouter", () => {
+describe("Router - '/'", () => {
   describe("With GET request", () => {
     it("Should return status code 200 when successfull.", done => {
       request(expressServer)

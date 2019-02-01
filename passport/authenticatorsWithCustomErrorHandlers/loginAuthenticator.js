@@ -26,7 +26,7 @@ module.exports = (req, res, next) => {
 
       return res.status(200).json({
         success: true,
-        session: user.token,
+        token: user.token,
         username: user.username
       });
     }
