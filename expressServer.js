@@ -12,6 +12,7 @@ const defaultErrorHandler = require("./errorHandlers/middlewares/defaultErrorHan
 const rootRouter = require("./routers/rootRouter/rootRouter");
 const authRouter = require("./routers/authRouter/authRouter");
 const jsonRouter = require("./routers/jsonRouter/jsonRouter");
+const imageRouter = require("./routers/imageRouter/imageRouter");
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use("/auth", authRouter);
 
 // Protected Endpoints
 app.use("/json", jsonRouter);
+app.use("/image", imageRouter);
 
 // Error Handlers
 app.use(customErrorHandler);
