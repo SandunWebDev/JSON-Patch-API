@@ -17,7 +17,8 @@ module.exports = (req, res, next) => {
       // "user" not populated mean not authenticated.
       if (!user) {
         // Error Handled by "customErrorHandler" middleware.
-        return handleCustomError(next, {
+        return handleCustomError({
+          next,
           customErrType: "clientError",
           customErrMsg: info.message,
           statusCode: 401

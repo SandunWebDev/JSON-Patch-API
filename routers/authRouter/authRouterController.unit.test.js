@@ -7,8 +7,10 @@ const {
   auth_tokenValidatorPath__POST
 } = require("./authRouterController");
 
+const handleCustomError = require("../../errorHandlers/handleCustomError");
+
 describe("Router Controller - '/auth/'", () => {
-  describe("Path - 'POST /auth/login'", () => {
+  describe("Path - 'POST /auth/login' (Handled By Passport LoginAutenticator)", () => {
     describe("When all credentials provided successfully.", () => {
       let req;
       let res;
@@ -26,7 +28,7 @@ describe("Router Controller - '/auth/'", () => {
 
         res = httpMocks.createResponse();
 
-        next__MOCK = jest.fn().mockImplementation(err => err);
+        next__MOCK = jest.fn();
       });
 
       afterEach(() => {
@@ -53,15 +55,15 @@ describe("Router Controller - '/auth/'", () => {
       });
     });
 
-    describe("When some credentials NOT provided and error is handled by customeErrorHandler.", () => {
+    describe("When some credentials NOT provided and error is handled by handleCustomError().", () => {
       let req;
       let res;
       let next__MOCK;
 
       beforeEach(() => {
+        req = httpMocks.createRequest();
         res = httpMocks.createResponse();
-
-        next__MOCK = jest.fn().mockImplementation(err => err);
+        next__MOCK = jest.fn().mockImplementation(errResult => errResult);
       });
 
       afterEach(() => {

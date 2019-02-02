@@ -8,6 +8,7 @@ module.exports = {
   rules: {
     "no-console": "off",
     "no-unused-vars": "off", // Since express error middleware need "next" whether its used or not. TODO: Should find proper solution.
+    "consistent-return": "off",
     camelcase: "off"
   },
 
