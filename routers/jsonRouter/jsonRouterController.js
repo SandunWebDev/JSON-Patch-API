@@ -2,7 +2,7 @@
 const jsonpatch = require("fast-json-patch");
 const { jsonRouter__ErrorHandler } = require("./helpers/errorHandlers");
 
-module.exports.json_patchPath__POST = (req, res) => {
+module.exports.json_patchPath__POST = (req, res, next) => {
   // PATH ---> "json/patch"
   const { document, patch } = req.body;
 
@@ -27,6 +27,6 @@ module.exports.json_patchPath__POST = (req, res) => {
       patchedDocument
     });
   } catch (err) {
-    jsonRouter__ErrorHandler(err);
+    jsonRouter__ErrorHandler(err, next);
   }
 };

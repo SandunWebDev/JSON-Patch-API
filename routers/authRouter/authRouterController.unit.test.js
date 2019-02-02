@@ -73,7 +73,7 @@ describe("Router Controller - '/auth/'", () => {
         next__MOCK.mockReset();
       });
 
-      it("Should return error with status code 401 when username is not provided.", () => {
+      it("Error should be handled when username is not provided.", () => {
         // Mocking unsuccessfull request.
         req = httpMocks.createRequest({
           method: "POST",
@@ -91,7 +91,7 @@ describe("Router Controller - '/auth/'", () => {
         expect(next__MOCK.mock.results[0].value.statusCode).toEqual(401);
       });
 
-      it("Should return error with status code 401 when password is not provided.", () => {
+      it("Error should be handled when password is not provided.", () => {
         // Mocking unsuccessfull request.
         req = httpMocks.createRequest({
           method: "POST",
@@ -109,7 +109,7 @@ describe("Router Controller - '/auth/'", () => {
         expect(next__MOCK.mock.results[0].value.statusCode).toEqual(401);
       });
 
-      it("Should return error with status code 401 when both username and password is not provided.", () => {
+      it("Error should be handled when both username and password is not provided.", () => {
         // Mocking unsuccessfull request.
         req = httpMocks.createRequest({
           method: "POST",

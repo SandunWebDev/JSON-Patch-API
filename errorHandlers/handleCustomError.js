@@ -19,11 +19,10 @@ module.exports = (errConfigs = {}) => {
   });
 
   // Sending custome error to get catched by  "customErrorHandler" middleware.
+  // Whether "next()" explicitly passed or not, end result is same. But next() is easier to test.
   if (next) {
-    // Using "next()" when explicitly specified. Useful for testing purposes.
     next(modifiedError);
   } else {
-    // Using "throw" instead of "next(modifiedError)" beacuse then theres no need to explicitly pass "next" object and we can use this utitlity any where.
     throw modifiedError;
   }
 };
