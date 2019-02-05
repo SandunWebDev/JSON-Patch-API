@@ -14,6 +14,7 @@ module.exports.image_thumbnailPath__POST = (req, res, next) => {
   // Validating required parameters.
   if (!imageURL) {
     return handleCustomError({
+      next,
       customErrType: "clientError",
       statusCode: 401,
       customErrMsg: "Missing Necessary Parameters. (imageURL)"
@@ -22,6 +23,7 @@ module.exports.image_thumbnailPath__POST = (req, res, next) => {
 
   if (!validator.isURL(imageURL)) {
     return handleCustomError({
+      next,
       customErrType: "clientError",
       statusCode: 401,
       customErrMsg: "Provided imageUrl is invalid."
