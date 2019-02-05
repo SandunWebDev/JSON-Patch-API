@@ -10,7 +10,7 @@
     "start:dev": "nodemon index.js",
     "debug": "nodemon --inspect index.js",
     "test": "jest --coverage",
-    "test:ci": "npm test && codecov",
+    "test:ci": "npm test && codecov -t ${CODECOV_TOKEN}",
     "test:watchAll": "jest --watchAll",
     "test:unit": "jest --testPathIgnorePatterns integration --watchAll",
     "test:integration": "jest --testPathIgnorePatterns unit --watchAll",
