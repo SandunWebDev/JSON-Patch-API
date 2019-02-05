@@ -8,6 +8,7 @@
     "lint:fix": "eslint ./ --fix --ignore-path .gitignore",
     "start": "node index.js",
     "start:dev": "nodemon index.js",
+    "debug": "nodemon --inspect index.js",
     "test": "jest --coverage",
     "test:ci": "npm test && codecov",
     "test:watchAll": "jest --watchAll",

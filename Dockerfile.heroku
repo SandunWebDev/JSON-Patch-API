@@ -1,4 +1,6 @@
-# ******************************************* BUILD STAGE 1 - Production ******************************************* 
+# ******************************************* BUILD STAGE 1 - Production (For Heroku) ******************************************* 
+
+# Nothing changed here other than "dev" stage is deleted.
 
 # Using full Node Image instead of slim Alpine Image because "sharp module" is used in this program.
 # "sharp module" uses libvc which not included in alipine images and not stable even if installed in a alpine image.
@@ -25,13 +27,3 @@ COPY . ./
 # Starting Server.
 CMD [ "npm", "start" ]
 
-
-# ******************************************* SUB BUILD STAGE - For Development/Testing ******************************************* 
-# Loading above "production" stage.
-FROM prod as dev
-
-# Installing developer dependecies also.
-RUN npm install --only=development && npm cache clean --force
-
-# Starting Development Server.
-CMD [ "npm", "run dev" ]
