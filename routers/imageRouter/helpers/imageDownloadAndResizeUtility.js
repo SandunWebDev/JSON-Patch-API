@@ -41,7 +41,11 @@ module.exports.imageResizeGenerator = function imageResizeGenerator(
   height
 ) {
   try {
-    return sharp().resize(parseInt(width, 10), parseInt(height, 10));
+    // Converting and validating width, height
+    const widthAsInteger = parseInt(width, 10);
+    const heightAsInteger = parseInt(height, 10);
+
+    return sharp().resize(widthAsInteger, heightAsInteger);
   } catch (err) {
     return handleCustomError({
       customErrType: "clientError",

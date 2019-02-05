@@ -13,61 +13,42 @@ const axiosMock = new AxiosMockAdapter(axios);
 describe("Router Controller - '/image'", () => {
   describe("Path - '/image/thumbnail'", () => {
     describe("When path is already JWT validated (token) and the neccessary parameters (imageURL) are provided and valid.", () => {
-      // let req;
-      // let res;
-      // beforeEach(() => {
-      //   const testImagePath = path.resolve(
-      //     __dirname,
-      //     "helpers",
-      //     "testImage.jpeg"
-      //   );
-      //   const imageStream = fs.createReadStream(testImagePath);
-      //   // Dummy imageURL. Any request to this URL get mocked and return local image as stream.
-      //   const validImageURL =
-      //     "https://www.wikimedia.org/static/images/project-logos/enwiki-1.5x.png";
-      //   axiosMock.onAny().reply(() => {
-      //     return [200];
-      //   });
-      //   // Mocking successfull request.
-      //   req = httpMocks.createRequest({
-      //     method: "POST",
-      //     body: {
-      //       token: "VALID TOKEN",
-      //       imageURL: validImageURL
-      //     }
-      //   });
-      //   res = httpMocks.createResponse({
-      //     eventEmitter: require("events").EventEmitter
-      //   });
-      // });
-      // afterEach(() => {
-      //   // Resetting mocking objects.
-      //   req = "";
-      //   res = "";
-      //   axiosMock.reset();
-      // });
-      // it("Should return status code 200.", () => {
-      //   image_thumbnailPath__POST(req, res);
-      //   expect(res.statusCode).toEqual(200);
-      // });
-      // ----------------------------------------------------------------------------------------------
-      // it"Should return JSON containing {success : true, patchedDocument: ...}.", done => {
-      //   // image_thumbnailPath__POST(req, res);
-      //   // const responseData = JSON.parse(res._getData);
-      //   jest
-      //     .spyOn(imageDownloadAndResizeUtility, "downloadImageAsStream")
-      //     .mockImplementation(() => console.log("aaaaaaaaaaaa"));
-      //   res.on("end", () => {
-      //     expect(res._getData()).toEqual("data sent in request");
-      //     done();
-      //   });
-      //   image_thumbnailPath__POST(req, res);
-      //   // expect(responseData).toEqual(true);
-      //   // expect(responseData.patchedDocument).toEqual({
-      //   //   firstName: "Dwayne",
-      //   //   lastName: "Doe"
-      //   // });
-      // });
+      let req;
+      let res;
+      beforeEach(() => {
+        // Dummy valid imageURL. Any request to this URL get mocked.
+        const validImageURL =
+          "https://www.wikimedia.org/static/images/project-logos/enwiki-1.5x.png";
+
+        axiosMock
+          .onGet(
+            "https://www.wikimedia.org/static/images/project-logos/enwiki-1.5x.png"
+          )
+          .passThrough();
+
+        // Mocking successfull request.
+        req = httpMocks.createRequest({
+          method: "POST",
+          body: {
+            token: "VALID TOKEN",
+            imageURL: validImageURL
+          }
+        });
+
+        res = httpMocks.createResponse({
+          eventEmitter: require("events").EventEmitter
+        });
+      });
+      afterEach(() => {
+        // Resetting mocking objects.
+        req = "";
+        res = "";
+        axiosMock.reset();
+      });
+      it("Should return status code 200.", () => {
+        image_thumbnailPath__POST(req, res);
+        expect(res.statusCode).toEqual(200);
+      });
     });
 
     describe("When path is already JWT validated (token) but the neccessary parameters (imageURL) are not provided or valid.", () => {
