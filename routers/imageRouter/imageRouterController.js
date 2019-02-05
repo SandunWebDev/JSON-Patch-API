@@ -27,15 +27,16 @@ module.exports.image_thumbnailPath__POST = (req, res, next) => {
     */
 
   // Downloading image and piping image stream through different pipeline steps to serve resized image to user.
-  downloadImageAsStream(imageURL)
+  downloadImageAsStream(imageURL, next)
     .then(imageStream => {
       imageStream.pipe(imageResizer).pipe(res);
     })
     .catch(err => {
       return handleCustomError({
+        next,
         customErrType: "clientError",
         statusCode: 401,
-        customErrMsg: "Error Occured While Resizing Your Image. Try Agin."
+        customErrMsg: `Error Occured While Fetching Your Image. Check your Image URL is Public & Online. Then Try Agin.`
       });
     });
 

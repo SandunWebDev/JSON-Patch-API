@@ -12,16 +12,7 @@ module.exports.downloadImageAsStream = async function downloadImageAsStream(
     url: imgageURL,
     method: "GET",
     responseType: "stream"
-  })
-    .then(response => response.data)
-    .catch(err => {
-      return handleCustomError({
-        customErrType: "clientError",
-        statusCode: 401,
-        customErrMsg:
-          "Error Occured While Getting Your Image. Check Your Img Link Is Valid Or Not."
-      });
-    });
+  }).then(response => response.data);
 };
 
 module.exports.downloadImageToDisk = async function downloadImageToDisk(

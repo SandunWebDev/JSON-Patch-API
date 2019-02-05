@@ -19,7 +19,8 @@
     "docker:dev:test": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml run --rm -e NODE_ENV=test backend npm test",
     "docker:prod:run": "docker-compose -f docker-compose.yml -f docker-compose.production.yml up --build",
     "docker:prod:stop": "docker-compose -f docker-compose.yml -f docker-compose.production.yml down -v && docker image prune -f",
-    "docker:prod:push": "(docker-compose -f docker-compose.yml -f docker-compose.production.yml build) && (docker tag json-patch-api-image-prod sandunwebdev/json-patch-api-image-prod:latest) && (docker push sandunwebdev/json-patch-api-image-prod:latest)"
+    "docker:prod:push": "(docker-compose -f docker-compose.yml -f docker-compose.production.yml build) && (docker tag json-patch-api-image-prod sandunwebdev/json-patch-api-image-prod:latest) && (docker push sandunwebdev/json-patch-api-image-prod:latest)",
+    "docker:heroku:push": "(heroku stack:set container) && (git push heroku master)"
   },
   "author": "",
   "license": "ISC",
