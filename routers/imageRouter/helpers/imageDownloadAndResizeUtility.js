@@ -12,7 +12,7 @@ module.exports.downloadImageAsStream = async function downloadImageAsStream(
     url: imgageURL,
     method: "GET",
     responseType: "stream"
-  }).then(response => response.data);
+  }).then(response => response);
 };
 
 module.exports.downloadImageToDisk = async function downloadImageToDisk(
